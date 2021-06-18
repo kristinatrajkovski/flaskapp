@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #af6565;
+            color: white;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        p, a {
+            font-size: 24px;
+        }
+
+        a {
+            color: rgb(14, 4, 4);
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            font-size: x-large;
+        }
+        img {
+            height: 100 px;
+            width: 200px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <p>{{ text }}</p>
+
+
+        {% if choices %}
+
+            <p>What do you do?</p>
+
+            <ul>
+                {% for (page_name, choice) in choices %}
+                <li>
+                    {{choice}}
+                    <br>
+                    {% if choice=="Go get coffee" %}
+                        <a href="{{url_for(page_name)}}"><img src= '{{url_for("static", filename = "coffee.jpg")}}'></a>
+                    {% elif choice=="Go to the interview with huge purple bags under your eyes" %} 
+                    <a href="{{url_for(page_name)}}"><img src= '{{url_for("static", filename = "eyes.jpg")}}'></a>
+                    {% elif choice=="Go home and change" %} 
+                    <a href="{{url_for(page_name)}}"><img src= '{{url_for("static", filename = "clothes.jpg")}}'></a>
+                    {% elif choice=="Still go to the interview" %} 
+                    <a href="{{url_for(page_name)}}"><img src= '{{url_for("static", filename = "stain.jpg")}}'></a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            {% if end == "dog" %}
+            <img src= '{{url_for("static", filename = "dog.jpg")}}'>
+            {% else %}
+            
+            <img src= '{{url_for("static", filename = "interview.jpg")}}'>
+            {% endif %}
+            <p>THE END.</p>
+    
+
+            <p><a href="{{url_for('start')}}">Play again.</a></p>
+        {% endif %}
+
+
+    </div>
+</body>
+
+</html>
